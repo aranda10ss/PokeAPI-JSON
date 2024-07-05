@@ -3,7 +3,6 @@ const path = require('path')
 const fs = require('fs')
 
 const app = express()
-const port = 3000
 const jsonFile = path.join(__dirname, '..', 'data/pokemon.json')
 
 app.use(express.json())
@@ -49,6 +48,4 @@ app.post('/pokemons', (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
-})
+module.exports = app
