@@ -38,7 +38,7 @@ app.post('/pokemons', (req, res) => {
     const pokemons = getPokemons()
     const newPokemon = {...req.body, id: pokemons.length + 1 }
     
-    if(!newPokemon.id || newPokemon.name) {
+    if(!newPokemon.id || !newPokemon.name) {
       return res.status(400).json({ error: 'Invalid request' })
     }
 
