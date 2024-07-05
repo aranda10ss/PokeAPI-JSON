@@ -12,11 +12,11 @@ const getPokemons = () => {
   return JSON.parse(data)
 }
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send('Hello, World!')
 })
 
-app.get('/pokemons', (req, res) => {
+app.get('/pokemons', (_, res) => {
   const pokemons = getPokemons()
   res.json(pokemons)
 })
