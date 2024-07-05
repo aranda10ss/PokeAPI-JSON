@@ -26,6 +26,10 @@ app.get('/pokemons/:id', (req, res) => {
   const pokemonId = parseInt(req.params.id, 10)
   const pokemon = pokemons.find(p => p.id === pokemonId)
 
+  if (!pokemon) {
+    return res.status(404).json({ error: 'pokemont not found'})
+  }
+  
   res.json(pokemon)
 })
 
