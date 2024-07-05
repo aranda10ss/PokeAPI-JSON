@@ -4,11 +4,12 @@ const fs = require('fs')
 
 const app = express()
 const port = 3000
+const jsonFile = path.join(__dirname, '..', 'data/pokemon.json')
 
 app.use(express.json())
 
 const getPokemons = () => {
-  const data = fs.readFileSync(path.join(__dirname, '..', 'data/pokemon.json'))
+  const data = fs.readFileSync(jsonFile)
   return JSON.parse(data)
 }
 
@@ -40,7 +41,7 @@ app.post('/pokemons', (req, res) => {
 
     pokemons.push(newPokemon)
   
-    fs.writeFileSync(path.join(__dirname, '..', 'data/pokemon.json'), JSON.stringify(pokemons, null, 2))
+    fs.writeFileSync(jsonFile, JSON.stringify(pokemons, null, 2))
   
     res.status(201).json(newPokemon)
   } catch (err) {
