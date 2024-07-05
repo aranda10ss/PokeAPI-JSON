@@ -12,10 +12,6 @@ const getPokemons = () => {
   return JSON.parse(data)
 }
 
-app.get('/', (_, res) => {
-  res.send('Hello, World!')
-})
-
 app.get('/pokemons', (_, res) => {
   const pokemons = getPokemons()
   res.json(pokemons)
