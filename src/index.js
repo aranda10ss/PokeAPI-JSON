@@ -21,6 +21,14 @@ app.get('/pokemons', (_, res) => {
   res.json(pokemons)
 })
 
+app.get('/pokemons/:id', (req, res) => {
+  const pokemons = getPokemons()
+  const pokemonId = parseInt(req.params.id, 10)
+  const pokemon = pokemons.find(p => p.id === pokemonId)
+
+  res.json(pokemon)
+})
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
 })
