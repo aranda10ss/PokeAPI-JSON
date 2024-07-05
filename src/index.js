@@ -37,6 +37,11 @@ app.post('/pokemons', (req, res) => {
   try {
     const pokemons = getPokemons()
     const newPokemon = {...req.body, id: pokemons.length + 1 }
+    
+    if(!newPokemon.id || newPokemon.name) {
+      return res.status(400).json({ error: 'Invalid request' })
+    }
+
     pokemons.push(newPokemon)
   
     fs.writeFileSync(path.join(__dirname, '..', 'data/pokemon.json'), JSON.stringify(pokemons, null, 2))
