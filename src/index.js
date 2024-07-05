@@ -29,8 +29,18 @@ app.get('/pokemons/:id', (req, res) => {
   if (!pokemon) {
     return res.status(404).json({ error: 'pokemont not found'})
   }
-  
+
   res.json(pokemon)
+})
+
+app.post('/pokemons', (req, res) => {
+  const pokemons = getPokemons()
+  const newPokemon = {...req.body, id: pokemons.length + 1 }
+  pokemons.push(newPokemon)
+
+  fs.writeFileSync(path.join(__dirname, '..', 'data/pokemon.json'), JSON.stringify(pokemons, null, 2))
+
+  res.status(201).json(newPokemon)
 })
 
 app.listen(port, () => {
