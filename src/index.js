@@ -34,13 +34,17 @@ app.get('/pokemons/:id', (req, res) => {
 })
 
 app.post('/pokemons', (req, res) => {
-  const pokemons = getPokemons()
-  const newPokemon = {...req.body, id: pokemons.length + 1 }
-  pokemons.push(newPokemon)
-
-  fs.writeFileSync(path.join(__dirname, '..', 'data/pokemon.json'), JSON.stringify(pokemons, null, 2))
-
-  res.status(201).json(newPokemon)
+  try {
+    const pokemons = getPokemons()
+    const newPokemon = {...req.body, id: pokemons.length + 1 }
+    pokemons.push(newPokemon)
+  
+    fs.writeFileSync(path.join(__dirname, '..', 'data/pokemon.json'), JSON.stringify(pokemons, null, 2))
+  
+    res.status(201).json(newPokemon)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
 })
 
 app.listen(port, () => {
