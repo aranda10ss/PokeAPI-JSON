@@ -12,7 +12,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"express": "^4.19.2"
+		"express": "^4.19.2",
+		"prisma": "^5.16.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",
