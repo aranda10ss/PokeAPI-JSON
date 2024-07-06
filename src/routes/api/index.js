@@ -28,18 +28,11 @@ router.get('/pokemons/:id', async (req, res) => {
 	}
 })
 
-router.post('/pokemons', (req, res) => {
+router.post('/pokemons', async (req, res) => {
 	try {
-		const pokemons = getPokemons()
-		const newPokemon = { id: pokemons.length + 1, ...req.body }
-
-		if (!newPokemon.id || !newPokemon.name) {
-			return res.status(400).json({ error: 'Invalid request' })
-		}
-
-		pokemons.push(newPokemon)
-		savePokemons(pokemons)
-
+		const { name } = req.body
+		const newPokemon = await savePokemons(name)
+	
 		res.status(201).json(newPokemon)
 	} catch (err) {
 		res.status(500).json({ error: err.message })

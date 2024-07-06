@@ -8,6 +8,15 @@ const getPokemons = async () => {
 	return pokemons
 }
 
+const savePokemons = async (name) => {
+	console.log(name)
+	await prisma.pokemon.create({
+		data: {
+			name,
+		},
+	})
+}
 module.exports = {
 	getPokemons,
+	savePokemons,
 }
