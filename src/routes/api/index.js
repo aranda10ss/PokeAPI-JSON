@@ -1,20 +1,20 @@
 const express = require('express')
-const { getPokemons, savePokemons } = require('../../utils/pokeManager')
+const { getPokemons, savePokemons } = require('../../utils/db')
 
 const router = express.Router()
 
-router.get('/pokemons', (_, res) => {
+router.get('/pokemons', async (_, res) => {
 	try {
-		const pokemons = getPokemons()
+		const pokemons = await getPokemons()
 		res.json(pokemons)
 	} catch (err) {
 		res.status(500).json({ error: err.message })
 	}
 })
 
-router.get('/pokemons/:id', (req, res) => {
+router.get('/pokemons/:id', async (req, res) => {
 	try {
-		const pokemons = getPokemons()
+		const pokemons = await getPokemons()
 		const pokemonId = Number.parseInt(req.params.id, 10)
 		const pokemon = pokemons.find(p => p.id === pokemonId)
 
